@@ -1,14 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Configuración de la URL del backend (cámbiala si tu backend está en produccion)
-    const BACKEND_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' ? 'http://localhost:3000' : 'https://tu-backend-produccion.com';
-    
+    const BACKEND_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' ? 'http://localhost:3000' : 'https://chatbot-backend-1-5fmw.onrender.com';
+
     const apiKeyModal = document.getElementById('apiKeyModal');
     const apiKeyValue = document.getElementById('apiKeyValue');
     const saveApiKeyBtn = document.getElementById('saveApiKeyBtn');
     const apiKeyError = document.getElementById('apiKeyError');
     const chatContainer = document.querySelector('.chat-container');
     const logoutBtn = document.getElementById('logoutBtn');
-    
+
     const chatBox = document.getElementById('chatBox');
     const userInput = document.getElementById('userInput');
     const sendBtn = document.getElementById('sendBtn');
@@ -64,10 +64,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const addMessage = (role, content) => {
         const messageDiv = document.createElement('div');
         messageDiv.className = `message ${role}-message`;
-        
+
         const contentDiv = document.createElement('div');
         contentDiv.className = 'message-content';
-        
+
         if (role === 'bot') {
             contentDiv.innerHTML = parseMarkdown(content);
         } else if (role === 'user') {
@@ -75,11 +75,11 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (role === 'system') {
             contentDiv.textContent = content;
         }
-        
+
         messageDiv.appendChild(contentDiv);
         chatBox.appendChild(messageDiv);
         scrollToBottom();
-        
+
         if (role === 'user') {
             messages.push({ role: 'user', content });
         } else if (role === 'bot') {
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sendMessage = async () => {
         const text = userInput.value.trim();
         if (!text) return;
-        
+
         const apiKey = sessionStorage.getItem('deepseekApiKey');
         if (!apiKey) {
             checkApiKey();
@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             const data = await response.json();
-            
+
             loadingEl.remove();
 
             if (!response.ok) {
@@ -155,16 +155,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             addMessage('bot', data.reply.content);
-            
+
         } catch (error) {
             loadingEl.remove();
-            
+
             const errorDiv = document.createElement('div');
             errorDiv.className = 'message bot-message error';
             errorDiv.innerHTML = `<div class="message-content" style="color: #ef4444;">Error: ${error.message}</div>`;
             chatBox.appendChild(errorDiv);
             scrollToBottom();
-            
+
             if (error.message.toLowerCase().includes('api key') || error.message.includes('401')) {
                 setTimeout(() => {
                     sessionStorage.removeItem('deepseekApiKey');
