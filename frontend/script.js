@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Configuración de la URL del backend (cámbiala si tu backend está en produccion)
+    const BACKEND_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' ? 'http://localhost:3000' : 'https://tu-backend-produccion.com';
+    
     const apiKeyModal = document.getElementById('apiKeyModal');
     const apiKeyValue = document.getElementById('apiKeyValue');
     const saveApiKeyBtn = document.getElementById('saveApiKeyBtn');
@@ -134,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 apiMessages.unshift({ role: 'system', content: 'You are a helpful AI assistant powered by DeepSeek.' });
             }
 
-            const response = await fetch('http://localhost:3000/api/chat', {
+            const response = await fetch(`${BACKEND_URL}/api/chat`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

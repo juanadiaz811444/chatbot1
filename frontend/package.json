@@ -1,0 +1,11 @@
+{
+  "name": "chatbot-frontend",
+  "version": "1.0.0",
+  "description": "Frontend para el chatbot de DeepSeek",
+  "scripts": {
+    "start": "serve ."
+  },
+  "dependencies": {
+    "serve": "^14.2.1"
+  }
+}
