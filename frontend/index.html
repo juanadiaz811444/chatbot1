@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepSeek Chatbot</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="apiKeyModal" class="modal">
+        <div class="modal-content">
+            <h2>Welcome to DeepSeek Chat</h2>
+            <p>Please enter your DeepSeek API Key to continue.</p>
+            <input type="password" id="apiKeyValue" placeholder="sk-..." />
+            <button id="saveApiKeyBtn">Start Chatting</button>
+            <p id="apiKeyError" class="error-msg" style="display: none;">API Key is required</p>
+        </div>
+    </div>
+
+    <div class="chat-container">
+        <header class="chat-header">
+            <h1>DeepSeek AI</h1>
+            <button id="logoutBtn" class="logout-btn">Change API Key</button>
+        </header>
+        
+        <div id="chatBox" class="chat-box">
+            <div class="message system-message">
+                <div class="message-content">Hello! How can I help you today?</div>
+            </div>
+        </div>
+        
+        <div class="input-area">
+            <input type="text" id="userInput" placeholder="Type your message..." />
+            <button id="sendBtn">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
